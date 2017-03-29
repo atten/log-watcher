@@ -1,0 +1,16 @@
+*.py[cod]
+*.js.map
+__pycache__/
+
+# Directories
+.idea
+static/bower_components
+static/js/urls.js
+
+# Translations
+*.mo
+
+# Files
+local_settings.py
+secret_settings.py
+data/auth

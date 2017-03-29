@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include "include/css.html" %}
+</head>
+
+<body class="pushable">
+
+{% block content %}{% endblock %}
+
+  {% include "include/contrib_js.html" %}
+
+
+<script>
+Ractive.DEBUG = {{ config.DEBUG|lower }};
+var env = {
+  is_minified: {{ (not config.DEBUG)|lower }},
+
+  collections: [
+    {% for collection in collections %}'{{collection}}',{% endfor %}
+  ]
+}
+</script>
+
+{% include "include/js.html" %}
+{% block bottom_scripts %}{% endblock %}
+
+</body>
+</html>

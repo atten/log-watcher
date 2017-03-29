@@ -1,0 +1,7 @@
+Flask
+Flask-Script
+Flask-Bower
+funcy
+pymongo
+gunicorn
+wheel

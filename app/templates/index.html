@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block bottom_scripts %}
+    <script src="static/apps/log_watcher.js"></script>
+
+  <script>
+    $.when.apply($, _get_module('log_watcher').ready).then(function() {
+        var widget = new Ractive.components.LogWatcher({
+            el: 'body'
+        });
+    });
+  </script>
+
+{% endblock %}

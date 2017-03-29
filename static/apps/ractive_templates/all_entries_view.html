@@ -1,0 +1,15 @@
+<LogTable entries="{{ entries }}"></LogTable>
+
+{{ ^entries }}
+    {{ #loaded }}
+      <div class="ui bottom attached info message">
+        {{ #if collections.length }}
+            No entries for current filters
+        {{ else }}
+            No selected collections
+        {{ /if }}
+      </div>
+    {{ / }}
+{{ / }}
+
+{{ #loading }}<div class="ui active centered inline loader"></div>{{ / }}

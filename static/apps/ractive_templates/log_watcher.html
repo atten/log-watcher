@@ -1,0 +1,50 @@
+<div class="ui {{#sidebar_visible}}visible{{/}} left vertical sidebar">
+  <h2 class="ui icon header">
+    <i class="find icon"></i>
+    <div class="content">
+      Log watcher
+    </div>
+  </h2>
+
+  <div class="ui segments">
+    <div class="ui segment">
+      <p>Collections</p>
+    </div>
+
+    <div class="fluid ui vertical buttons">
+      {{ #collections }}
+        <button class="ui button {{#this.is_active}}teal{{/}}" on-click="collection-click">{{ this.name }}</button>
+      {{ / }}
+    </div>
+  </div>
+</div>
+
+<div class="pusher">
+  <div class="ui top attached demo menu">
+    <a class="item" on-click="sidebar-toggle-click"><i class="sidebar icon"></i>Filters</a>
+
+    <div class="item full-width">
+      <div class="ui action input {{ ^filters_str_valid }}error{{/}}">
+        <input type="text" placeholder="Search" lazy=500 value="{{ filters_str }}">
+      </div>
+    </div>
+  </div>
+
+  <div id="log-tabs" class="ui top attached pointing secondary menu">
+    <a class="item" data-tab="all" on-click="tab-click">All entries</a>
+    <a class="item" data-tab="chain" on-click="tab-click">Chain view</a>
+  </div>
+
+  <div class="ui bottom attached tab segment" data-tab="all">
+    {{ #opened_tabs.all }}
+      <AllEntriesView collections="{{ active_collections }}" filters="{{ filters }}"/>
+    {{ / }}
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="chain">
+    {{ #opened_tabs.chain }}
+      <ChainView uuid="{{ selected_uuid }}" collections="{{ active_collections }}"/>
+    {{ / }}
+  </div>
+
+
+</div>

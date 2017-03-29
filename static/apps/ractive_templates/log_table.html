@@ -1,0 +1,54 @@
+<table class="ui attached sortable very compact definition fixed table">
+  <thead>
+    <tr>
+      <th width="24"></th>
+      <th width="64">UUID</th>
+      <th width="200" class="sorted descending">Timestamp</th>
+      <th width="170" class="">Collection</th>
+      <th class="">Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ #entries }}
+      <tr on-click="entry-click1">
+        <td class="selectable" on-click="expand-entry-click">{{ #this.expanded }}-{{else}}+{{/}}</td>
+        <td>{{>UUIDLink}}</td>
+        <td>{{ this.timestamp }}</td>
+        <td>{{ this.collection }}</td>
+        <td>
+          {{ #if this.data.response.code }}
+            {{>SummaryLogItem}}
+          {{ else }}
+            {{ this.message }}
+          {{ /if }}
+        </td>
+      </tr>
+
+      {{ #this.expanded }}
+        <tr>
+          <td></td>
+          <td colspan="4">
+            <span class="code">{{ entry_to_str(this) }}</span>
+          </td>
+        </tr>
+      {{ / }}
+    {{ / }}
+  </tbody>
+</table>
+
+<div class='gallery'>
+  {{#items}}
+    {{>thumbnail}}
+  {{/items}}
+</div>
+
+{{#partial SummaryLogItem}}
+  <span class="ui {{ color_for_code(data.response.code) }} label selectable" on-click="response-code-click" on-mouseenter="response-code-hover">{{ data.response.code }}</span>
+  <code class="ui label selectable" on-click="request-path-click">{{ data.request.method }} {{ data.request.path }}</code>
+  <span class="ui label selectable" on-click="entry-user-click"><i class="user icon"></i>{{ data.request.user.username }}:{{ data.request.user.id }}</span>
+  <span class="ui teal label">{{ milliseconds(data.execution_time) }}ms, {{ data.db_queries }} queries, {{ bytes_to_str(data.response.length) }}</span>
+{{/partial}}
+
+{{#partial UUIDLink}}
+  <a href="{{ uuid_link(this.data.log_uuid || this.data.uuid) }}">{{ uuid_short(this.data.log_uuid || this.data.uuid)}}</a>
+{{/partial}}

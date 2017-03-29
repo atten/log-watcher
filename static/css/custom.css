@@ -1,0 +1,26 @@
+.ui.left.visible.sidebar {
+    box-shadow: none;
+    background: #f9fafb;
+}
+
+.sidebar .ui.segments {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.full-width {
+    flex: 1!important;
+}
+
+.code {
+    white-space: pre;
+    font: 500 90% monospace;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
+.ui.table tbody tr td.selectable {
+    padding-left: 7px;  /* чинит для td.selectable */
+}
